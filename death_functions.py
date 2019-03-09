@@ -20,7 +20,8 @@ def kill_monster(monster):
     monster.blocks = False
     monster.fighter = None
     monster.ai = None
-    monster.name = 'remains of ' + monster.name
+    # TODO create a function that determines the correct grammar for a/an
+    monster.name = 'remains of a ' + monster.name
     monster.render_order = RenderOrder.CORPSE
 
     return death_message

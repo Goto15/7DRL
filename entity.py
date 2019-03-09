@@ -1,6 +1,8 @@
 import math
 import tcod as tc
 
+from components.item import Item
+
 from render_functions import RenderOrder
 
 
@@ -8,7 +10,8 @@ class Entity:
     """
     Generic object to represent players, enemies, items, etc.
     """
-    def __init__(self, x, y, char, color, name, blocks=False, render_order=RenderOrder.CORPSE, fighter=None, ai=None):
+    def __init__(self, x, y, char, color, name, blocks=False, render_order=RenderOrder.CORPSE, fighter=None, ai=None,
+                 item=None, inventory=None, stairs=None, level=None, equipment=None, equippable=None):
         self.x = x
         self.y = y
         self.char = char
@@ -18,12 +21,41 @@ class Entity:
         self.render_order = render_order
         self.fighter = fighter
         self.ai = ai
+        self.item = item
+        self.inventory = inventory
+        self.stairs = stairs
+        self.level = level
+        self.equipment = equipment
+        self.equippable = equippable
 
         if self.fighter:
             self.fighter.owner = self
 
         if self.ai:
             self.ai.owner = self
+
+        if self.item:
+            self.item.owner = self
+
+        if self.inventory:
+            self.inventory.owner = self
+
+        if self.stairs:
+            self.stairs.owner = self
+
+        if self.level:
+            self.level.owner = self
+
+        if self.equipment:
+            self.equipment.owner = self
+
+        if self.equippable:
+            self.equippable.owner = self
+
+            if not self.item:
+                item = Item()
+                self.item = item
+                self.item.owner = self
 
     def move(self, dx, dy):
         # moves the entity around the screen
@@ -49,8 +81,7 @@ class Entity:
         # Scan the current map each turn and set all the walls as unwalkable
         for y1 in range(game_map.height):
             for x1 in range(game_map.width):
-                tc.map_set_properties(fov, x1, y1, not game_map.tiles[x1][y1].block_sight,
-                                           not game_map.tiles[x1][y1].blocked)
+                tc.map_set_properties(fov, x1, y1, not game_map.tiles[x1][y1].block_sight, not game_map.tiles[x1][y1].blocked)
 
         # Scan all the objects to see if there are objects that must be navigated around
         # Check also that the object isn't self or the target (so that the start and the end points are free)
@@ -84,6 +115,9 @@ class Entity:
 
             # Delete the path to free memory
         tc.path_delete(my_path)
+
+    def distance(self, x, y):
+        return math.sqrt((x - self.x) ** 2 + (y - self.y) ** 2)
 
     def distance_to(self, other):
         dx = other.x - self.x
