@@ -17,7 +17,6 @@ def get_names_under_mouse(mouse, entities, fov_map):
     (x, y) = (mouse.cx, mouse.cy)
     entities_on_square = []
 
-    # TODO order by RenderOrder for importance
     for entity in entities:
         if entity.x == x and entity.y == y and tc.map_is_in_fov(fov_map, entity.x, entity.y):
             if entity.ai:

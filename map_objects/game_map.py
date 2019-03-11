@@ -2,6 +2,8 @@ from random import randint
 import tcod as tc
 
 from components.ai import BasicMonster
+from components.bestiary.bestiary import get_monster_chances
+from components.bestiary.monster_functions import *
 from components.equipment import EquipmentSlots
 from components.equippable import Equippable
 from components.fighter import Fighter
@@ -92,7 +94,7 @@ class GameMap:
                 num_rooms += 1
 
         stairs_component = Stairs(self.dungeon_level + 1)
-        down_stairs = Entity(center_of_last_room_x, center_of_last_room_y, '>', tc.white, 'Stairs',
+        down_stairs = Entity(center_of_last_room_x, center_of_last_room_y, '=', tc.white, 'Stairs',
                              render_order=RenderOrder.STAIRS, stairs=stairs_component)
         entities.append(down_stairs)
 
@@ -114,18 +116,20 @@ class GameMap:
             self.tiles[x][y].block_sight = False
 
     def place_entities(self, room, entities):
-        max_monsters_per_room = from_dungeon_level([[2, 1], [3, 4], [5, 6]], self.dungeon_level)
+        # TODO Move monster and item maxes and generation to the bestiary and armory
+        monsters_per_room = from_dungeon_level(max_monsters_per_room, self.dungeon_level)
         max_items_per_room = from_dungeon_level([[1, 1], [2, 4]], self.dungeon_level)
 
         # Get a random number of monsters
-        number_of_monsters = randint(0, max_monsters_per_room)
+        number_of_monsters = randint(0, monsters_per_room)
         number_of_items = randint(0, max_items_per_room)
 
         # Add to component file for item and monster generation
-        monster_chances = {
-            'orc': 80,
-            'troll': from_dungeon_level([[15, 3], [30, 5], [60, 7]], self.dungeon_level)
-        }
+        # TODO break item chances out into their own file
+        monster_chances = dict(get_monster_chances())
+
+        for key in monster_chances:
+            monster_chances[key] = from_dungeon_level(monster_chances[key], self.dungeon_level)
 
         item_chances = {
             'healing_potion': 35,
@@ -141,20 +145,23 @@ class GameMap:
             x = randint(room.x1 + 1, room.x2 - 1)
             y = randint(room.y1 + 1, room.y2 - 1)
 
+            # TODO fix AI look up. Currently setting the AI from a dict means the entities do not move
             if not any([entity for entity in entities if entity.x == x and entity.y == y]):
                 monster_choice = random_choice_from_dict(monster_chances)
 
-                if monster_choice == 'orc':
-                    fighter_component = Fighter(hp=20, defense=0, power=4, xp=35)
-                    ai_component = BasicMonster()
-                    monster = Entity(x, y, 'o', tc.desaturated_green, 'Orc', blocks=True,
-                                     render_order=RenderOrder.ACTOR, fighter=fighter_component, ai=ai_component)
-                if monster_choice == 'troll':
-                    fighter_component = Fighter(hp=30, defense=2, power=8, xp=100)
-                    ai_component = BasicMonster()
+                # Create the specific type of monster
+                fighter_component = Fighter(hp=generate_hp(monster_choice), defense=generate_defense(monster_choice),
+                                            power=generate_power(monster_choice), xp=generate_xp(monster_choice))
+                ai_component = BasicMonster()
 
-                    monster = Entity(x, y, 'T', tc.darker_green, 'Troll', blocks=True, fighter=fighter_component,
-                                     render_order=RenderOrder.ACTOR, ai=ai_component)
+                monster = Entity(x, y,
+                                 set_sprite(monster_choice),
+                                 generate_color(monster_choice),
+                                 generate_name(monster_choice),
+                                 set_blocks(monster_choice),
+                                 set_render_order(monster_choice),
+                                 fighter_component,
+                                 ai_component)
 
                 entities.append(monster)
 
@@ -165,6 +172,7 @@ class GameMap:
             if not any([entity for entity in entities if entity.x == x and entity.y == y]):
                 item_choice = random_choice_from_dict(item_chances)
 
+                # TODO add the armory.items lookup functionality
                 if item_choice == 'healing_potion':
                     item_component = Item(use_function=heal, amount=40)
                     item = Entity(x, y, '!', tc.violet, 'Healing Potion', render_order=RenderOrder.ITEM,

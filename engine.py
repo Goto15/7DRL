@@ -264,7 +264,7 @@ def play_game(player, entities, game_map, message_log, game_state, con, panel, c
 def main():
     constants = get_constants()
 
-    tc.console_set_custom_font('arial10x10.png', tc.FONT_TYPE_GREYSCALE | tc.FONT_LAYOUT_TCOD)
+    tc.console_set_custom_font('terminal16x16.png', tc.FONT_TYPE_GREYSCALE | tc.FONT_LAYOUT_ASCII_INROW)
 
     tc.console_init_root(constants['screen_width'], constants['screen_height'], constants['window_title'], False)
 
