@@ -1,15 +1,10 @@
-from components.armory.item_functions import get_item_chances
 from components.bestiary.monster_functions import *
 from components.armory.item_functions import *
-from components.equipment import EquipmentSlots
-from components.equippable import Equippable
 from components.fighter import Fighter
-from components.item import Item
 from components.stairs import Stairs
 
 from entity import Entity
 from game_messages import Message
-from item_functions import cast_confuse, cast_fireball, cast_lightning, heal
 from random_utils import from_dungeon_level, random_choice_from_dict
 from render_functions import RenderOrder
 
@@ -113,6 +108,7 @@ class GameMap:
             self.tiles[x][y].block_sight = False
 
     def place_entities(self, room, entities):
+        # Determine number of monsters and items per room
         monsters_per_room = from_dungeon_level(max_monsters_per_room, self.dungeon_level)
         items_per_room = from_dungeon_level(max_items_per_room, self.dungeon_level)
 
@@ -120,14 +116,13 @@ class GameMap:
         number_of_monsters = randint(0, monsters_per_room)
         number_of_items = randint(0, items_per_room)
 
-        # Add to component file for item and monster generation
+        # Create monster generation chances
         room_monster_chances = dict(get_monster_chances())
-
         for key in room_monster_chances:
             room_monster_chances[key] = from_dungeon_level(room_monster_chances[key], self.dungeon_level)
 
+        # Create item generation chances
         room_item_chances = dict(get_item_chances())
-
         for key in item_chances:
             room_item_chances[key] = from_dungeon_level(item_chances[key], self.dungeon_level)
 
@@ -145,18 +140,18 @@ class GameMap:
                                             power=generate_power(monster_choice), xp=generate_xp(monster_choice))
                 ai_component = BasicMonster()
 
-                monster = Entity(x, y,
-                                 set_sprite(monster_choice),
-                                 generate_color(monster_choice),
-                                 generate_name(monster_choice),
-                                 set_blocks(monster_choice),
-                                 set_render_order(monster_choice),
-                                 fighter_component,
-                                 ai_component)
+                temp_sprite = set_sprite(monster_choice)
+                temp_color = generate_color(monster_choice)
+                temp_name = generate_name(monster_choice)
+                temp_does_block = set_blocks(monster_choice)
+                temp_render_order = set_render_order(monster_choice)
+
+                monster = Entity(x, y, char=temp_sprite, color=temp_color, name=temp_name, blocks=temp_does_block,
+                                 render_order=temp_render_order, fighter=fighter_component, ai=ai_component)
 
                 entities.append(monster)
 
-        # Item generation
+        # Item generation loop
         for i in range(number_of_items):
             x = randint(room.x1 + 1, room.x2 - 1)
             y = randint(room.y1 + 1, room.y2 - 1)

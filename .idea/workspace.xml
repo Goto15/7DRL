@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="49105117-547a-4f9f-a68b-d255721c79fb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/components/armory/item_functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/armory/items.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/armory/items.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/bestiary/bestiary.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/bestiary/bestiary.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/bestiary/monster_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/components/bestiary/monster_functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/loader_functions/initialize_new_game.py" beforeDir="false" afterPath="$PROJECT_DIR$/loader_functions/initialize_new_game.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/map_objects/game_map.py" beforeDir="false" afterPath="$PROJECT_DIR$/map_objects/game_map.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/savegame.dat" beforeDir="false" afterPath="$PROJECT_DIR$/savegame.dat" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,8 +15,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/engine.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3349">
-              <caret line="197" selection-start-line="197" selection-end-line="197" />
+            <state relative-caret-position="255">
+              <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
               <folding>
                 <element signature="e#0#17#0" expanded="true" />
               </folding>
@@ -46,27 +39,52 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/components/armory/item_functions.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="569">
-              <caret line="45" column="27" lean-forward="true" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="27" />
+            <state>
+              <caret column="37" lean-forward="true" selection-start-column="37" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/map_objects/game_map.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2244">
+              <caret line="150" lean-forward="true" selection-start-line="150" selection-end-line="150" />
               <folding>
-                <element signature="e#0#37#0" expanded="true" />
+                <element signature="e#64#115#0" expanded="true" />
+                <element signature="e#865#1000#0" />
+                <element signature="e#1042#1141#0" />
+                <element signature="e#3932#4192#0" />
+                <element signature="e#4244#4383#0" />
+                <element signature="e#4435#4574#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/map_objects/game_map.py">
+        <entry file="file://$PROJECT_DIR$/entity.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="25" lean-forward="true" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+            <state relative-caret-position="255">
+              <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
               <folding>
-                <element signature="e#865#1000#0" />
-                <element signature="e#1042#1141#0" />
-                <element signature="e#3932#4192#0" />
-                <element signature="e#4244#4383#0" />
-                <element signature="e#4435#4574#0" />
-                <element signature="e#5785#6679#0" />
+                <element signature="e#0#11#0" expanded="true" />
+                <element signature="e#1520#1598#0" />
+                <element signature="e#1676#2040#0" />
+                <element signature="e#2104#4545#0" />
+                <element signature="e#4684#4779#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/components/bestiary/bestiary.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+              <folding>
+                <element signature="e#0#17#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -96,7 +114,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/input_handlers.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-327">
+            <state>
               <folding>
                 <element signature="e#0#17#0" expanded="true" />
               </folding>
@@ -170,7 +188,7 @@
               <item name="7DRL" type="b2602c69:ProjectViewProjectNode" />
               <item name="7DRL" type="462c0819:PsiDirectoryNode" />
               <item name="components" type="462c0819:PsiDirectoryNode" />
-              <item name="armory" type="462c0819:PsiDirectoryNode" />
+              <item name="bestiary" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="7DRL" type="b2602c69:ProjectViewProjectNode" />
@@ -250,7 +268,7 @@
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1529246" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1529246" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Project Explorer" order="2" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -258,8 +276,8 @@
       <window_info id="Job Explorer" order="5" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32891566" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.32891566" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.4" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32891566" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -360,16 +378,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/components/bestiary/bestiary.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-112">
-          <caret line="12" lean-forward="true" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/random_utils.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="354">
@@ -381,6 +389,35 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
           <caret line="181" selection-start-line="181" selection-end-line="181" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game_messages.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-55">
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/loader_functions/initialize_new_game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="89" column="23" selection-start-line="89" selection-start-column="23" selection-end-line="89" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/components/bestiary/bestiary.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -403,40 +440,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/input_handlers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-327">
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/game_messages.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-55">
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/entity.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-            <element signature="e#1520#1598#0" />
-            <element signature="e#1676#2040#0" />
-            <element signature="e#2104#4545#0" />
-            <element signature="e#4684#4779#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/loader_functions/initialize_new_game.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="89" column="23" selection-start-line="89" selection-start-column="23" selection-end-line="89" selection-end-column="23" />
+        <state>
           <folding>
             <element signature="e#0#17#0" expanded="true" />
           </folding>
@@ -445,8 +449,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/engine.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3349">
-          <caret line="197" selection-start-line="197" selection-end-line="197" />
+        <state relative-caret-position="255">
+          <caret line="15" column="24" lean-forward="true" selection-start-line="15" selection-start-column="24" selection-end-line="15" selection-end-column="24" />
           <folding>
             <element signature="e#0#17#0" expanded="true" />
           </folding>
@@ -465,25 +469,36 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/components/armory/item_functions.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="569">
-          <caret line="45" column="27" lean-forward="true" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
+        <state>
+          <caret column="37" lean-forward="true" selection-start-column="37" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/map_objects/game_map.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="25" lean-forward="true" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+        <state relative-caret-position="2244">
+          <caret line="150" lean-forward="true" selection-start-line="150" selection-end-line="150" />
           <folding>
+            <element signature="e#64#115#0" expanded="true" />
             <element signature="e#865#1000#0" />
             <element signature="e#1042#1141#0" />
             <element signature="e#3932#4192#0" />
             <element signature="e#4244#4383#0" />
             <element signature="e#4435#4574#0" />
-            <element signature="e#5785#6679#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/entity.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <element signature="e#1520#1598#0" />
+            <element signature="e#1676#2040#0" />
+            <element signature="e#2104#4545#0" />
+            <element signature="e#4684#4779#0" />
           </folding>
         </state>
       </provider>
