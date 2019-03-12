@@ -4,18 +4,14 @@ from render_functions import RenderOrder
 from components.ai import BasicMonster
 
 
-def get_monster_list():
-    return monster_list
+# Max number of monsters per room [max # of monsters, minimum level]
+max_monsters_per_room = [
+    [2, 1],
+    [3, 4],
+    [5, 6]
+]
 
-
-def get_monster(monster):
-    return monster_list[monster]
-
-
-def get_monster_chances():
-    return monster_chances
-
-
+# List of monsters with their stats
 monster_list = {
     'orc': {
         # Static properties
@@ -57,6 +53,7 @@ monster_list = {
     }
 }
 
+# Spawn rates of monsters
 monster_chances = {
     'orc': [[80, 1]],
     'troll': [[15, 3],

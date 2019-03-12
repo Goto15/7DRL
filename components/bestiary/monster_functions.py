@@ -1,13 +1,21 @@
 from random import randint
 
-from components.bestiary.bestiary import get_monster_list, get_monster
-
-# Max number of monsters per room [max # of monsters, minimum level]
-max_monsters_per_room = [
-    [2, 1], [3, 4], [5, 6]
-]
+from components.bestiary.bestiary import *
 
 
+def get_monster(monster):
+    return monster_list[monster]
+
+
+def get_monster_chances():
+    return monster_chances
+
+
+def get_monster_list():
+    return monster_list
+
+
+# Generate specific stats
 def generate_ai(monster_name):
     monster_stats = get_monster(monster_name)
     return monster_stats['ai_component']
@@ -29,8 +37,8 @@ def generate_hp(monster_name):
 
 
 def generate_name(monster_name):
-    monster_list = get_monster_list()
-    return monster_list[monster_name]['name']
+    temp_monster_list = get_monster_list()
+    return temp_monster_list[monster_name]['name']
 
 
 def generate_power(monster_name):
@@ -43,6 +51,7 @@ def generate_xp(monster_name):
     return randint(monster_stats['xp_min'], monster_stats['xp_max'])
 
 
+# Set static properties
 def set_blocks(monster_name):
     monster_stats = get_monster(monster_name)
     return monster_stats['blocks']

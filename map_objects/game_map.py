@@ -1,9 +1,6 @@
-from random import randint
-import tcod as tc
-
-from components.ai import BasicMonster
-from components.bestiary.bestiary import get_monster_chances
+from components.armory.item_functions import get_item_chances
 from components.bestiary.monster_functions import *
+from components.armory.item_functions import *
 from components.equipment import EquipmentSlots
 from components.equippable import Equippable
 from components.fighter import Fighter
@@ -116,38 +113,32 @@ class GameMap:
             self.tiles[x][y].block_sight = False
 
     def place_entities(self, room, entities):
-        # TODO Move monster and item maxes and generation to the bestiary and armory
         monsters_per_room = from_dungeon_level(max_monsters_per_room, self.dungeon_level)
-        max_items_per_room = from_dungeon_level([[1, 1], [2, 4]], self.dungeon_level)
+        items_per_room = from_dungeon_level(max_items_per_room, self.dungeon_level)
 
         # Get a random number of monsters
         number_of_monsters = randint(0, monsters_per_room)
-        number_of_items = randint(0, max_items_per_room)
+        number_of_items = randint(0, items_per_room)
 
         # Add to component file for item and monster generation
-        # TODO break item chances out into their own file
-        monster_chances = dict(get_monster_chances())
+        room_monster_chances = dict(get_monster_chances())
 
-        for key in monster_chances:
-            monster_chances[key] = from_dungeon_level(monster_chances[key], self.dungeon_level)
+        for key in room_monster_chances:
+            room_monster_chances[key] = from_dungeon_level(room_monster_chances[key], self.dungeon_level)
 
-        item_chances = {
-            'healing_potion': 35,
-            'sword': from_dungeon_level([[5, 4]], self.dungeon_level),
-            'shield': from_dungeon_level([[15, 8]], self.dungeon_level),
-            'lightning_scroll': from_dungeon_level([[25, 4]], self.dungeon_level),
-            'fireball_scroll': from_dungeon_level([[25, 6]], self.dungeon_level),
-            'confusion_scroll': from_dungeon_level([[10, 2]], self.dungeon_level)
-        }
+        room_item_chances = dict(get_item_chances())
 
+        for key in item_chances:
+            room_item_chances[key] = from_dungeon_level(item_chances[key], self.dungeon_level)
+
+        # Monster generation loop
         for i in range(number_of_monsters):
             # Choose a random location in the room
             x = randint(room.x1 + 1, room.x2 - 1)
             y = randint(room.y1 + 1, room.y2 - 1)
 
-            # TODO fix AI look up. Currently setting the AI from a dict means the entities do not move
             if not any([entity for entity in entities if entity.x == x and entity.y == y]):
-                monster_choice = random_choice_from_dict(monster_chances)
+                monster_choice = random_choice_from_dict(room_monster_chances)
 
                 # Create the specific type of monster
                 fighter_component = Fighter(hp=generate_hp(monster_choice), defense=generate_defense(monster_choice),
@@ -165,39 +156,25 @@ class GameMap:
 
                 entities.append(monster)
 
+        # Item generation
         for i in range(number_of_items):
             x = randint(room.x1 + 1, room.x2 - 1)
             y = randint(room.y1 + 1, room.y2 - 1)
 
             if not any([entity for entity in entities if entity.x == x and entity.y == y]):
-                item_choice = random_choice_from_dict(item_chances)
+                item_choice = random_choice_from_dict(room_item_chances)
+                temp_sprite = set_item_sprite(item_choice)
+                temp_color = set_item_color(item_choice)
+                temp_name = set_item_name(item_choice)
+                temp_render_order = set_item_render_order()
 
-                # TODO add the armory.items lookup functionality
-                if item_choice == 'healing_potion':
-                    item_component = Item(use_function=heal, amount=40)
-                    item = Entity(x, y, '!', tc.violet, 'Healing Potion', render_order=RenderOrder.ITEM,
-                                  item=item_component)
-                elif item_choice == 'sword':
-                    equippable_component = Equippable(EquipmentSlots.MAIN_HAND, power_bonus=3)
-                    item = Entity(x, y, '/', tc.sky, 'Sword', equippable=equippable_component)
-                elif item_choice == 'shield':
-                    equippable_component = Equippable(EquipmentSlots.OFF_HAND, defense_bonus=1)
-                    item = Entity(x, y, '[', tc.darker_orange, 'Shield', equippable=equippable_component)
-                elif item_choice == 'fireball_scroll':
-                    item_component = Item(use_function=cast_fireball, targeting=True, targeting_message=Message(
-                        'Left-click a target tile for the fireball, or right-click to cancel.', tc.light_cyan),
-                                          damage=25, radius=3)
-                    item = Entity(x, y, '#', tc.red, 'Fireball Scroll', render_order=RenderOrder.ITEM,
-                                  item=item_component)
-                elif item_choice == 'confusion_scroll':
-                    item_component = Item(use_function=cast_confuse, targeting=True, targeting_message=Message(
-                        'Left-click an enemy to confuse it, or right-click to cancel.', tc.light_cyan))
-                    item = Entity(x, y, '#', tc.light_pink, 'Confusion Scroll', render_order=RenderOrder.ITEM,
-                                  item=item_component)
+                if is_equippable(item_choice):
+                    temp_equippable = get_component(item_choice)
+                    item = Entity(x, y, char=temp_sprite, color=temp_color, name=temp_name, equippable=temp_equippable)
                 else:
-                    item_component = Item(use_function=cast_lightning, damage=40, maximum_range=5)
-                    item = Entity(x, y, '#', tc.yellow, 'Lightning Scroll', render_order=RenderOrder.ITEM,
-                                  item=item_component)
+                    temp_consumable = get_component(item_choice)
+                    item = Entity(x, y, char=temp_sprite, color=temp_color, name=temp_name,
+                                  render_order=temp_render_order, item=temp_consumable)
 
                 entities.append(item)
 

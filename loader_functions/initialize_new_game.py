@@ -77,7 +77,7 @@ def get_constants():
 
 
 def get_game_variables(constants):
-    fighter_component = Fighter(hp=100, defense=1, power=2)
+    fighter_component = Fighter(hp=1000, defense=1, power=2)
     inventory_component = Inventory(26)
     level_component = Level()
     equipment_component = Equipment()
@@ -86,6 +86,7 @@ def get_game_variables(constants):
                     equipment=equipment_component)
     entities = [player]
 
+    # TODO move dagger to items dict
     equippable_component = Equippable(EquipmentSlots.MAIN_HAND, power_bonus=2)
     dagger = Entity(0, 0, '-', tc.sky, 'Dagger', equippable=equippable_component)
     player.inventory.add_item(dagger)
